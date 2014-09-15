@@ -28,10 +28,10 @@ def ic_cb(tim):
     # Read the GPIO pin to figure out if this was a rising or falling edge
     if ic_pin.value():
         # Rising edge - start of the pulse
-        ic_start = ic.pulse_width()
+        ic_start = ic.capture()
     else:
         # Falling edge - end of the pulse
-        ic_width = ic.pulse_width() - ic_start & 0x0fffffff
+        ic_width = ic.capture() - ic_start & 0x0fffffff
     debug_pin.value(0)
 
 micropython.alloc_emergency_exception_buf(100)
