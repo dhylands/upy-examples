@@ -8,15 +8,15 @@ import micropython
 # The period of 19999 gives a 20,000 usec or 20 msec period. The pulse width
 # is then in microseconds.
 servo_pin = pyb.Pin.board.X1
-servo = pyb.Timer(5, pin=servo_pin, mode=pyb.Timer.PWM, channel=1, prescaler=83, period=19999)
-servo.pulse(1000)
+t5 = pyb.Timer(5, prescaler=83, period=19999);
+servo = t5.channel(1, pin=servo_pin, mode=pyb.Timer.PWM)
+servo.pulse_width(1000)
 
 debug_pin = pyb.Pin('X2', pyb.Pin.OUT_PP)
 
+t2 = pyb.Timer(2, prescaler=83, period=0x0fffffff)
 ic_pin = pyb.Pin.board.X4
-ic = pyb.Timer(2, pin=ic_pin, mode=pyb.Timer.IC, channel=4,
-               prescaler=83, period=0x0fffffff,
-               ic_polarity=pyb.Timer.IC_POLARITY_BOTH)
+ic = t2.channel(4, pin=ic_pin, mode=pyb.Timer.IC, ic_polarity=pyb.Timer.IC_POLARITY_BOTH)
 
 ic_start = 0
 ic_width = 0
@@ -28,17 +28,17 @@ def ic_cb(tim):
     # Read the GPIO pin to figure out if this was a rising or falling edge
     if ic_pin.value():
         # Rising edge - start of the pulse
-        ic_start = ic.pulse()
+        ic_start = ic.pulse_width()
     else:
         # Falling edge - end of the pulse
-        ic_width = ic.pulse() - ic_start & 0x0fffffff
+        ic_width = ic.pulse_width() - ic_start & 0x0fffffff
     debug_pin.value(0)
 
 micropython.alloc_emergency_exception_buf(100)
 ic.callback(ic_cb)
 pw = 1000
 while True:
-    servo.pulse(pw)
+    servo.pulse_width(pw)
     pyb.delay(200)
     print("pulse_width = %d, ic_width = %d, ic_start = %d" % (pw, ic_width, ic_start))
     pw = ((pw - 900) % 1100) + 1000
