@@ -5,7 +5,7 @@ import pyb
 # With a period of 37500, this wraps about 10 times/second
 # With center mode PWM, this corresponds to 5 Hz
 
-t0 = pyb.Timer(0, prescaler=128, period=37500, counter_mode=pyb.Timer.COUNTER_MODE_CENTER)
-ch0 = t0.channel(0, pin=pyb.Pin.board.D22, mode=pyb.Timer.PWM, pulse_width=((t0.period() + 1) // 4) - 1)
-fch1 = t0.channel(1, pin=pyb.Pin.board.D23, mode=pyb.Timer.PWM, pulse_width=((t0.period() + 1) // 2) - 1)
+t0 = pyb.Timer(0, prescaler=128, period=37500, mode=pyb.Timer.CENTER)
+ch0 = t0.channel(0, pyb.Timer.PWM, pin=pyb.Pin.board.D22, pulse_width=(t0.period() + 1) // 4)
+ch1 = t0.channel(1, pyb.Timer.PWM, pin=pyb.Pin.board.D23, pulse_width=(t0.period() + 1) // 2)
 

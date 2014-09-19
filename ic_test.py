@@ -9,14 +9,14 @@ import micropython
 # is then in microseconds.
 servo_pin = pyb.Pin.board.X1
 t5 = pyb.Timer(5, prescaler=83, period=19999);
-servo = t5.channel(1, pin=servo_pin, mode=pyb.Timer.PWM)
+servo = t5.channel(1, pyb.Timer.PWM, pin=servo_pin)
 servo.pulse_width(1000)
 
 debug_pin = pyb.Pin('X2', pyb.Pin.OUT_PP)
 
 t2 = pyb.Timer(2, prescaler=83, period=0x0fffffff)
 ic_pin = pyb.Pin.board.X4
-ic = t2.channel(4, pin=ic_pin, mode=pyb.Timer.IC, ic_polarity=pyb.Timer.IC_POLARITY_BOTH)
+ic = t2.channel(4, pyb.Timer.IC, pin=ic_pin, polarity=pyb.Timer.BOTH)
 
 ic_start = 0
 ic_width = 0

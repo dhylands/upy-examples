@@ -5,5 +5,5 @@ import pyb
 # With a period of 37500, this wraps about 10 times/second
 
 t0 = pyb.Timer(0, prescaler=128, period=37500)
-ch0 = t0.channel(0, pin=pyb.Pin.board.D22, mode=pyb.Timer.OC, compare=10000, oc_mode=pyb.Timer.OC_MODE_TOGGLE)
-ch1 = t0.channel(1, pin=pyb.Pin.board.D23, mode=pyb.Timer.OC, compare=20000, oc_mode=pyb.Timer.OC_MODE_TOGGLE)
+ch0 = t0.channel(0, pyb.Timer.OC_TOGGLE, pin=pyb.Pin.board.D22, compare=10000)
+fch1 = t0.channel(1, pyb.Timer.OC_TOGGLE, pin=pyb.Pin.board.D23, compare=20000)

@@ -14,13 +14,13 @@ import micropython
 
 servo_pin = pyb.Pin.board.D22
 t0 = pyb.Timer(0, prescaler=16, period=59999);
-servo = t0.channel(0, pin=servo_pin, mode=pyb.Timer.PWM)
+servo = t0.channel(0, pyb.Timer.PWM, pin=servo_pin)
 servo.pulse_width(1000 * 3)
 
 debug_pin = pyb.Pin('D21', pyb.Pin.OUT_PP)
 
 ic_pin = pyb.Pin.board.D23
-ic = t0.channel(1, pin=ic_pin, mode=pyb.Timer.IC, ic_polarity=pyb.Timer.IC_POLARITY_BOTH)
+ic = t0.channel(1, pyb.Timer.IC, pin=ic_pin, polarity=pyb.Timer.BOTH)
 
 ic_start = 0
 ic_width = 0
