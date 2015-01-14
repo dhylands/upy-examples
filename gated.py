@@ -6,7 +6,7 @@ import stm
 # Y1 corresponds to Timer 8 channel 1, which we'll use as output
 # X1 corresponds to Timer 2 channel 1, which we'll use an the input gate
 #
-# We'll confgure X1 as a GPIO and initially drive it high (which corresponds
+# We'll confgure Y1 as a GPIO and initially drive it high (which corresponds
 # to not counting). Then we'll toggle that pin when the user presses a key.
 
 y1 = pyb.Pin('Y1', pyb.Pin.OUT_PP)
@@ -54,7 +54,7 @@ tim2 = pyb.Timer(2, prescaler=8399, period=49999)
 ch1 = tim2.channel(1, pyb.Timer.IC, pin=pyb.Pin.board.X1, polarity=pyb.Timer.FALLING)
 
 # We'll need to set the SMS=101 and TS=101 in the SMCR register ourselves,
-# since none of the exposed APIs maniipulate that register.
+# since none of the exposed APIs manipulate that register.
 #
 # SMS is bits 2:0 and TS is bits 6:4
 
