@@ -1,5 +1,20 @@
 import pyb
 
+# This script is intended to be installed as boot.py. It will flash the
+# Red LED for 2 seconds. If you press the USR switch during those 2
+# seconds then it will cycle between the blue, yellow, and green LEDs to
+# allow the USB mode to b eslected.
+#
+# Blue   - CDC+MSC
+# Yellow - CDC+HID
+# Green  - CDC only
+#
+# When you release the USR switch then it will flash the selected mode
+# a couple of times and persist the choice.
+#
+# If you boot up without pressing the USR switch then it will use the
+# currently persisted USB mode (default is USB+MSC)
+
 sw = pyb.Switch()
 # 1 - Red
 # 2 - Green
