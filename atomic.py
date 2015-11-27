@@ -32,7 +32,7 @@ t.report()
 t.start()
 while not t.done:
     t.main_count += 1
-    pyb.disable_irq()
+    irq_state = pyb.disable_irq()
     t.counter += 1
-    pyb.enable_irq()
+    pyb.enable_irq(irq_state)
 t.report()
