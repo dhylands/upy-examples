@@ -12,7 +12,7 @@ import stm
 pin_a = pyb.Pin('X1', pyb.Pin.AF_PP, pull=pyb.Pin.PULL_NONE, af=pyb.Pin.AF1_TIM2)
 pin_b = pyb.Pin('X2', pyb.Pin.AF_PP, pull=pyb.Pin.PULL_NONE, af=pyb.Pin.AF1_TIM2)
 
-# The prescaler is ignored. When incrementing, the counter will count up-to
+# The prescaler needs to be 0. When incrementing, the counter will count up-to
 # and including the period value, and then reset to 0.
 enc_timer = pyb.Timer(2, prescaler=0, period=100000)
 # ENC_AB will increment/decrement on the rising edge of either the A channel or the B
