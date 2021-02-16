@@ -2,6 +2,8 @@
 #
 # The following assumes Pin 17 is jumper to Pin 16
 #
+#   from machine import Pin
+#
 #   pin16 = Pin(16, Pin.IN, Pin.PULL_UP)
 #   pin17 = Pin(17, Pin.OUT)
 #   pin17.low()
